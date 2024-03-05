@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>main</title>
+    <script type="text/javascript">
+    function openWindows(){
+        var name=prompt("请输入名称：");
+        window.location.href="/lx220/main1/"+name+""
+    }
+    </script>
+    {% load static %}
+</head>
+<style>
+ body {
+    font-family: Arial, sans-serif;
+}
+
+#main {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    font-size: 24px;
+}
+
+.butt, .butt1 {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.butt:hover, .butt1:hover {
+    background-color: #45a049;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #DDD;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e8e8e8;
+}
+
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+div {
+    text-align: center;
+    margin-top: 20px;
+}
+    </style>
+<body>
+     <div id="main" >
+         <h1  style="display: flex; flex-direction: column; align-items: center;">当前可用容器</h1>
+         <br></br>
+         <a href="/lx220/home"><button class="butt">退出登录</button></a>
+         {% if resp1 %}
+        <table border="1" align="center" >
+            <tr>
+                <th>名称</th>
+                <th>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</th>
+                <th>对象数</th>
+                <th>容器大小</th>
+                <th>操作</th>
+
+            </tr>
+            {% for key in resp1 %}
+            <tr>
+                <td >{{key.name}}</td>
+                <td >&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</td>
+                <td >{{key.count}}</td>
+                <td >{{key.bytes}}</td>
+                <td  align="center" ><input  class="butt1" type="button" value="进入" onclick='window.location.href="/lx220/main2/{{key.name}}"'><br/>
+<!--                <input type="button" value="删除" onclick='window.location.href="/lx220/main5/{{key.name}}"'>-->
+                    <a href="javascript:if(confirm('确认删除？'))location='/lx220/main5/{{key.name}}'">删除</a><br/>
+                    <input class="butt1" type="button" value="添加" onclick="openWindows();"/>
+                </td>
+            {% endfor %}
+            </tr>
+        </table>
+         <div>
+            {% if resp1.has_previous %}
+                <a href="?page=1">|&lt;第一页</a>
+                <a href="?page={{ resp1.previous_page_number }}">前一页</a>
+            {% endif %}
+            page {{resp1.number}} of {{resp1.paginator.num_pages}}
+            {% if resp1.has_next %}
+                <a href="?page={{resp1.next_page_number}}">下一页</a>
+                <a href="?page={{resp1.paginator.num_pages}}">最末页&gt;|</a>
+            {% endif %}
+            {%else%}
+            没有容器
+            {%endif%}
+        </div>
+     </div>
+</body>
+</html>

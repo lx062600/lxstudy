@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>main2</title>
+     {% load static %}
+</head>
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+#main {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.butt {
+  display: block;
+  width: 200px;
+  margin: 20px auto;
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.butt:hover {
+  background-color: #0056b3;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th {
+  padding: 20px;
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+audio {
+  max-width: 100%;
+  margin: auto;
+  display: block;
+  border-radius: 5px;
+}
+</style>
+<body>
+     <div id="main" >
+         <h1>当前对象 {{data4}}内容</h1>
+         <a href="/lx220/main2/{{data3}}"><button class="butt">返回上级页面</button></a>
+
+
+         <table>
+             {% if resp1 %}
+               <th align="center"><img src="data:image/png;base64,{{resp1}}" alt="显示失败></th>
+             {% elif resp3 %}
+               <th align="center"><video src="data:video/mp4;base64,{{resp3}}" controls="controls" height="450px"></video></th>
+             {% elif resp4 %}
+               <th align="center"><audio controls><source src="data:audio/mpeg;base64,{{resp4}}"></audio></th>
+             {% else %}
+               <th align="left">{{resp2}}</th>
+             {% endif %}
+        </table>
+     </div>
+</body>
+</html>
