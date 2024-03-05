@@ -1,3 +1,2 @@
-git is a distributions versionstystem.
-git is free system.
-Creating a new branch is quick and simple.
+django实现swift在线网盘，容器的增加删除查看，文件内容的增加删除下载上传都实现了
+将ip地址身份码换成自己的就行
